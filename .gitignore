@@ -1,0 +1,7 @@
+# dependencies
+node_modules/
+
+# VS code
+.vscode
+
+.env
