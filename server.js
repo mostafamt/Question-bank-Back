@@ -14,6 +14,9 @@ const {
   uploadFileController,
   IndexController,
 } = require("./controllers");
+const { index, destroy, show } = require("./controllers/question");
+const MultipleChoice = require("./controllers/multipleChoice");
+
 require("dotenv").config();
 
 mongoose.connect(process.env.DATABASE_URL, {
@@ -33,13 +36,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json({ limit: "1mb" }));
 
 app.post("/fill-space", postFillSpaceQuestionController);
-app.post("/mcq", postMCQController);
+app.post("/multiple-choice", MultipleChoice.create);
 app.post("/true-false", postTrueFalseQuestionController);
-app.get("/list", getQuestionsController, postTrueFalseQuestionController);
+// app.get("/list", getQuestionsController, postTrueFalseQuestionController);
 app.get("/question", getQuestionController);
 app.delete("/question", deleteQuestionController);
 app.post("/upload", upload.single("file"), uploadFileController);
-app.get("/", IndexController);
+// app.get("/", IndexController);
+app.delete("/question/:id", destroy);
+app.get("/question/:id", show);
+app.get("/", index);
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,22 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MCQQuestionSchema = new Schema({
-  name: String,
-  url: String,
-  type: String,
-  createdAt: {
-    type: Date,
-    default: new Date(),
+const MCQQuestionSchema = new Schema(
+  {
+    name: String,
+    domain: String,
+    subDomain: String,
+    url: String,
+    type: String,
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
-MCQQuestionSchema.set("toObject", {
-  transform: function (doc, ret) {
-    delete ret.__v;
-  },
-});
+const MultipleChoice = mongoose.model("MCQ", MCQQuestionSchema);
 
-const MCQ = mongoose.model("MCQ", MCQQuestionSchema);
-
-module.exports = MCQ;
+module.exports = MultipleChoice;

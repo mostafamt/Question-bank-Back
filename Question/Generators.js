@@ -87,8 +87,6 @@ const generateAndUploadMutipleChoicesQuestions = async (
       return url;
     })
   );
-  // await saveFilesToDatabase(objectName, files, questions, MCQ_TYPE);
-  await saveFileToMongo(objectName, files[0], MCQ_TYPE);
   return files;
 };
 

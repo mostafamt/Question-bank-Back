@@ -22,6 +22,7 @@ const getQuestionsController = async (req, res) => {
 
 const postMCQController = async (req, res) => {
   const { name: objectName, questions } = req.body;
+  console.log(req.body);
 
   if (!objectName || !questions) {
     res.status(400).send();

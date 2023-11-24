@@ -4,18 +4,18 @@ const { uploadFile, saveFilesToDatabase } = require("../firebase");
 
 const replaceMcqQuestionTitle = (content, questionTitle) => {
   return content.replace(
-    /<p>What is your name\?<\/p>/g,
+    /<p>How old are you\?<\/p>/g,
     `<p>${questionTitle}</p>`
   );
 };
 
-const getOption = (title, correct) => {
+const getOption = (title, correct, tip) => {
   const option = {
     correct: correct,
     tipsAndFeedback: {
       chosenFeedback: "<div></div>\\n",
       notChosenFeedback: "<div></div>\\n",
-      tip: "",
+      tip: tip,
     },
     text: `<div>${title}</div>\\n`,
   };
@@ -24,8 +24,8 @@ const getOption = (title, correct) => {
 
 const replaceMcqQuestionOptions = (content, options) => {
   const array = options.map((option) => {
-    const { title, correct } = option;
-    return getOption(title, correct);
+    const { title, correct, tip } = option;
+    return getOption(title, correct, tip);
   });
   return content.replace(
     /\"answers\"[\s\S]*\\n"}]/g,
