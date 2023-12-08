@@ -14,7 +14,14 @@ const {
   uploadFileController,
   IndexController,
 } = require("./controllers");
-const { index, destroy, show } = require("./controllers/question");
+const {
+  index,
+  create,
+  show,
+  edit,
+  editQuestion,
+  destroy,
+} = require("./controllers/question");
 const MultipleChoice = require("./controllers/multipleChoice");
 
 require("dotenv").config();
@@ -46,6 +53,8 @@ app.post("/upload", upload.single("file"), uploadFileController);
 app.delete("/question/:id", destroy);
 app.get("/question/:id", show);
 app.get("/", index);
+app.put("/question/:id", edit);
+app.post("/question", create);
 
 const PORT = process.env.PORT || 5000;
 

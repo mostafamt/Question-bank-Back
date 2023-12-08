@@ -10,8 +10,10 @@ const create = async (req, res) => {
     subDomain,
     questions,
     objectOwner,
+    topic,
+    language,
+    questionType,
   } = req.body;
-  console.log(req.body);
 
   if (!objectName || !questions) {
     res.status(400).send();
@@ -22,14 +24,17 @@ const create = async (req, res) => {
     questions
   );
   const questionRes = await Promise.all(
-    files.map(async (file) => {
+    files.map(async (file, idx) => {
       const quest = await MultipleChoice.create({
         name: objectName,
-        domain: domain,
-        subDomain: subDomain,
-        objectOwner: objectOwner,
+        domain,
+        subDomain,
+        objectOwner,
+        topic,
+        language,
         url: file,
-        type: "Multiple Choice",
+        type: questionType,
+        question: questions[idx],
       });
       return quest;
     })
